@@ -8,5 +8,5 @@ while new_value ~= 0
     new_value = input('Digite o novo valor do resistor');
 end
 serie_result = sum (in_serie);
-fprintf('A resistência em série é %.2f', serie_result);
+fprintf('A resistência em série é %.2f', serie_result); 
 
