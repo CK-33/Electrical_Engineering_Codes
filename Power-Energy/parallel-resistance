@@ -1,1 +1,27 @@
+function parallel_resistance(r)
+% Inicialize a variável parallel com zeros, com um tamanho máximo estimado
+max_resistencias = 100; % Por exemplo, 100 resistências
+parallel = zeros(1, max_resistencias);
+parallel(1) = r;
+count = 1;
+
+new_value = input('Digite o novo valor da sua resistência, para encerrar, tecle 0: ');
+
+while new_value ~= 0
+    count = count + 1;
+    if count > length(parallel)
+        disp('Número máximo de resistências atingido');
+        break;
+    end
+    parallel(count) = new_value;
+    new_value = input('Digite o novo valor da sua resistência, para encerrar, tecle 0: ');
+end
+
+% Remova os zeros não utilizados
+parallel = parallel(1:count);
+
+equivalent_1 = sum(1./parallel);
+general_equivalent = 1/equivalent_1;
+
+fprintf('A resistência equivalente é: %.2f\n', general_equivalent);
 
