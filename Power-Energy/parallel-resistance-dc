@@ -25,3 +25,4 @@ general_equivalent = 1/equivalent_1;
 
 fprintf('A resistência equivalente é: %.2f\n', general_equivalent);
 
+
