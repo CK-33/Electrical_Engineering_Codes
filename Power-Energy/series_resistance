@@ -1,1 +1,12 @@
+function series_resistance(r)
+in_serie = [r];
+
+new_value = input('Digite o novo valor do resistor, caso não deseje um novo resistor, digite 0');
+
+while new_value ~= 0
+    in_serie = [in_serie, new_value];
+    new_value = input('Digite o novo valor do resistor');
+end
+serie_result = sum (in_serie);
+fprintf('A resistência em série é %.2f', serie_result);
 
