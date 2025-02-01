@@ -1,0 +1,65 @@
+function calc_potencia
+
+    fprintf('Bem vindo à calculadora de potências elétricas\n');
+    % Função para selecionar o elemento
+    elemento = select_element();
+    % Função para selecionar o regime
+    regime = select_regime();
+    % Função para calcular a potência
+    p = calculate_power(elemento, regime);
+    fprintf('A potência do seu dispositivo é: %f', p)
+end 
+
+function elemento = select_element()
+    elemento = input('\nPara calcular a potência de um resistor, digite [1]\nPara calcular a potência de um indutor, digite [2]\nPara calcular a potência de um capacitor, digite [3]\n');
+    while ~ismember(elemento, [1,2,3])
+        elemento = input('\nOpção inválida, por favor, digite [1], [2] ou [3]');
+    end 
+end
+
+function regime = select_regime()
+    regime = input('\nDigite 1 para regime AC e 2 para regime DC');
+    while ~ismember(regime, [1,2])
+        regime = input('\nOpção inválida, digite a opção correta');
+    end 
+end
+
+function p = calculate_power(elemento, regime)
+       switch elemento
+           case 1
+               p = resistor_power(regime);
+           case 2 
+               p = inductor_power(regime);
+           case 3
+               p = capacitor_power(regime);
+       end
+end 
+
+function p = resistor_power(regime)
+    resistencia = input('\nDigite a resistência (Ohms): ');
+    while resistencia <= 0
+        resistencia = input('Por favor, insira uma resistência positiva: ');
+    end
+    if regime == 1 % AC
+        tensao_rms = input('Digite a tensão RMS (Volts): ');
+        p = (tensao_rms^2) / resistencia;
+    else % DC
+        tensao = input('Digite a tensão (Volts): ');
+        p = (tensao^2) / resistencia;
+    end
+end 
+function p = inductor_power(regime)
+    if regime == 1 % AC
+        fprintf('\nCalculando a potência reativa do indutor.\n');
+        corrente_rms = input('Digite a corrente RMS (Amperes): ');
+        frequencia_ac = input('Digite a frequência AC (Hz): ');
+        indutancia = input('Digite a indutância do indutor (Henrys): ');
+        x_l = 2 * pi * frequencia_ac * indutancia;
+        p = (corrente_rms^2) * x_l;
+    else % DC
+        fprintf('\nEm regime DC, a potência no indutor é zero.\n');
+        p = 0;
+    end
+end
+
+
