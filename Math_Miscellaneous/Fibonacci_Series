@@ -1,0 +1,31 @@
+function fib = fibor(n)
+persistent memo %Storage the previous values calculated
+
+
+% Iniciatilizing a container
+
+    if isempty(memo)
+        memo = containers.Map('KeyType', 'double', 'ValueType', 'any');
+    end
+    
+% Base case of the Fibonacci series
+    
+    if n <= 2
+        fib = ones(1,n);
+        memo(n) = fib;
+        return;
+    end 
+
+    if isKey(memo, n)
+        fib = memo(n);
+        return;
+    end 
+    
+    fib = fibor(n-1);
+    fib(n) = fib(n-1) + fib(n-2);
+    memo(n) = fib;
+    
+end 
+    
+    
+    
