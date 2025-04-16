@@ -1,0 +1,72 @@
+function processamento_imagem()
+  % Carregar a imagem
+  [nome_arquivo, caminho_arquivo] = uigetfile({'*.jpg;*.png;*.bmp', 'Arquivos de Imagem (*.jpg, *.png, *.bmp)'}, 'Selecione a imagem');
+  if isequal(nome_arquivo, 0)
+    disp('Nenhuma imagem selecionada.');
+    return;
+  end
+  caminho_completo = fullfile(caminho_arquivo, nome_arquivo);
+  imagem_original = imread(caminho_completo);
+
+  % Exibir a imagem original
+  figure;
+  imshow(imagem_original);
+  title('Imagem Original');
+
+  % Menu de processamento
+  menu_processamento(imagem_original);
+end
+
+function menu_processamento(imagem_original)
+  disp('Selecione o processamento:');
+  disp('1. Escala de cinza');
+  disp('2. Filtro passa-baixa');
+  disp('3. Filtro passa-alta');
+  disp('4. Transformada de Fourier');
+  disp('5. Sair');
+
+  opcao = input('Opção: ');
+
+  switch opcao
+    case 1
+      imagem_processada = escala_cinza(imagem_original);
+      exibir_imagem_processada(imagem_processada, 'Escala de Cinza');
+    case 2
+      imagem_processada = filtro_passa_baixa_imagem(imagem_original);
+      exibir_imagem_processada(imagem_processada, 'Filtro Passa-Baixa');
+    case 3
+      imagem_processada = filtro_passa_alta_imagem(imagem_original);
+      exibir_imagem_processada(imagem_processada, 'Filtro Passa-Alta');
+    case 4
+      transformada_fourier_imagem(imagem_original);
+    case 5
+      disp('Encerrando...');
+      return;
+    otherwise
+      disp('Opção inválida.');
+  end
+
+  menu_processamento(imagem_original); % Retorna ao menu
+end
+
+function imagem_cinza = escala_cinza(imagem_original)
+  imagem_cinza = rgb2gray(imagem_original);
+end
+
+function exibir_imagem_processada(imagem_processada, titulo)
+  figure;
+  imshow(imagem_processada);
+  title(titulo);
+end
+
+function filtro_passa_baixa_imagem(imagem_original)
+  % Implementar filtro passa-baixa
+end
+
+function filtro_passa_alta_imagem(imagem_original)
+  % Implementar filtro passa-alta
+end
+
+function transformada_fourier_imagem(imagem_original)
+  % Implementar transformada de Fourier
+end
