@@ -17,11 +17,11 @@ function comparar_filtros(x, fs, tipo, fc)
 
     % Reproduzir ambos
     disp('Som original...');
-    sound(x, fs); pause(3);
+    sound(x, fs); pause(9);
     disp('Som com filtro FIR...');
-    sound(x_fir, fs); pause(3);
+    sound(x_fir, fs); pause(9);
     disp('Som com filtro IIR...');
-    sound(x_iir, fs); pause(3);
+    sound(x_iir, fs); pause(9);
 
     % Mostrar FFTs
     figure;
